@@ -1,14 +1,14 @@
 footer {
   min-height: 200px;
   width: 100%;
-  background-color: var(--primary-red);
-  color: white;
+  background-color: var(--primary-grey);
   margin-top: auto;
-  color: var(--primary-pink);
+  color: grey;
 
   img {
     max-width: 200px;
     opacity: 0.5;
+    mix-blend-mode: luminosity;
   }
 
   .footer__wrapper {
