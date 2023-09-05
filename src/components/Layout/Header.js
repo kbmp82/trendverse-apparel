@@ -28,7 +28,7 @@ export default function Header() {
                 contact
               </Link>
               <Link
-                to="/sign-in"
+                to="/account"
                 className="navigation__link"
                 aria-label="my account"
               >

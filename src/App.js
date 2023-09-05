@@ -4,7 +4,7 @@ import Footer from "./components/Layout/Footer";
 import Homepage from "./routes/Home/Homepage";
 import NotFound from "./components/Layout/NotFound";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import SignIn from "./routes/Sign-in/SignIn";
+import Account from "./routes/Account/Account";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" exact element={<Homepage />} />
-          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </main>

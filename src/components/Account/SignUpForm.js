@@ -1,16 +1,44 @@
 import React from "react";
 import { useImmer } from "use-immer";
-import { createAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
 import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
+import {
+  auth,
+  signInWithGooglePopup,
+  signInWithGoogleRedirect,
+  createUserDocumentFromAuth,
+  createAuthUserWithEmailAndPassword,
+} from "../../utils/firebase/firebase.utils";
 
-export default function SignUpForm({ onClick }) {
+export default function SignUpForm() {
   const [state, setState] = useImmer({
     displayName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  //useEffect  - for use with signInWithGoogleRedirect
+  //   useEffect(() => {
+  //     (async () => {
+  //       const response = await getRedirectResult(auth);
+  //       if (response) {
+  //         const userDocRef = await createUserDocumentFromAuth(response.user);
+  //       }
+  //     })();
+  //   }, []);
+
+  //   const logGoogleRedirectUser = async () => {
+  //     signInWithGoogleRedirect();
+  //   };
+  //other sign-in option for no redirect
+  const signUpWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    if (user) {
+      const userDocRef = await createUserDocumentFromAuth(user);
+    }
+  };
+
   function setFormField(e) {
     const { name, value } = e.target;
     setState((draft) => {
@@ -102,7 +130,7 @@ export default function SignUpForm({ onClick }) {
         <Button type="submit">Sign Up</Button>
       </form>
       <hr className="separator" />
-      <Button buttonType="google" onClick={onClick}>
+      <Button buttonType="google" onClick={signUpWithGoogle}>
         <img src="/google.svg" alt="Google login button" />
         Sign up with Google
       </Button>
