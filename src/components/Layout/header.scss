@@ -6,13 +6,8 @@ nav {
   }
   a {
     color: var(--primary-pink);
-    font-size: 1.8rem;
-    text-transform: uppercase;
+
     text-decoration: none;
-    &:hover {
-      color: var(--primary-pink);
-      opacity: 0.7;
-    }
 
     &:visited {
       color: var(--primary-pink);
@@ -33,6 +28,16 @@ nav {
     .navigation__links {
       display: flex;
       gap: 25px;
+      text-transform: uppercase;
+      color: var(--primary-pink);
+      font-size: 1.8rem;
+      .navigation__link {
+        &:hover {
+          cursor: pointer;
+          color: var(--primary-pink);
+          opacity: 0.7;
+        }
+      }
     }
 
     @media (min-width: 768px) {

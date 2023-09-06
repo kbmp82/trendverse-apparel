@@ -1,9 +1,13 @@
 import "./header.scss";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Container from "./Container";
+import { UserContext } from "../../context/user.context";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 export default function Header() {
+  const { currentUser } = useContext(UserContext);
+
   return (
     <header>
       <nav className="navigation">
@@ -32,8 +36,20 @@ export default function Header() {
                 className="navigation__link"
                 aria-label="my account"
               >
-                account
+                account{" "}
               </Link>
+              {currentUser ? (
+                <span
+                  onClick={() => {
+                    signOutUser();
+                  }}
+                  className="navigation__link"
+                >
+                  sign out
+                </span>
+              ) : (
+                ""
+              )}
               <Link to="/cart" className="navigation__link" aria-label="cart">
                 cart
               </Link>

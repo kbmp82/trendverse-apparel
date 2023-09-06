@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import FormInput from "../FormInput/FormInput";
+import { UserContext } from "../../context/user.context";
 import { useImmer } from "use-immer";
-import Button from "../Button/Button";
 import {
   auth,
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 
+//components
+import Button from "../Button/Button";
+
 export default function LoginForm() {
+  const { setCurrentUser } = useContext(UserContext);
   const [state, setState] = useImmer({
     email: "",
     password: "",
@@ -16,9 +20,6 @@ export default function LoginForm() {
 
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
-    if (user) {
-      console.log(user);
-    }
   };
 
   function setFormField(e) {
@@ -33,11 +34,12 @@ export default function LoginForm() {
     const formElements = e.target.elements;
     //submit form
     try {
-      const res = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         state.email,
         state.password
       );
-      console.log(res);
+
+      //clear forms
       setState(() => {
         return {
           email: "",

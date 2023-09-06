@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { getRedirectResult } from "firebase/auth";
+import React, { useEffect, useContext } from "react";
 import Page from "../../components/Layout/Page";
 import "./account.scss";
 import SignUpForm from "../../components/Account/SignUpForm";

@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useImmer } from "use-immer";
 import FormInput from "../FormInput/FormInput";
+import { UserContext } from "../../context/user.context";
+
 import Button from "../Button/Button";
 import {
   auth,
   signInWithGooglePopup,
   signInWithGoogleRedirect,
-  createUserDocumentFromAuth,
   createAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 
@@ -33,10 +34,7 @@ export default function SignUpForm() {
   //   };
   //other sign-in option for no redirect
   const signUpWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    if (user) {
-      const userDocRef = await createUserDocumentFromAuth(user);
-    }
+    await signInWithGooglePopup();
   };
 
   function setFormField(e) {
@@ -71,7 +69,7 @@ export default function SignUpForm() {
         state.displayName
       );
       console.log(res);
-      setState(() => {
+      setState((draft) => {
         return {
           displayName: "",
           email: "",
