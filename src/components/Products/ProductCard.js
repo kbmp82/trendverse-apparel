@@ -1,26 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./product-card.scss";
+import { CartContext } from "../../context/cart.context";
+
+//components
 import Button from "../Button/Button";
 
-export default function ProductCard({ product, setCartItem, cartItems }) {
-  function addItemToCart() {
-    console.log("add to cart", {
-      id: product.id,
-      name: product.name,
-      imageUrl: product.imageUrl,
-      price: product.price,
-    });
-    setCartItem([
-      ...cartItems,
-      {
-        id: product.id,
-        name: product.name,
-        imageUrl: product.imageUrl,
-        price: product.price,
-      },
-    ]);
-  }
-
+export default function ProductCard({ product }) {
+  const { addToCart } = useContext(CartContext);
+  const addProductToCart = () => {
+    addToCart(product);
+  };
   return (
     <div className="product-card">
       <div className="product">
@@ -31,8 +20,8 @@ export default function ProductCard({ product, setCartItem, cartItems }) {
           <span className="product__name">{product.name}</span>
           <span className="prouct__price">{product.price}</span>
         </div>
-        <Button onClick={addItemToCart} buttonType="atc">
-          Add to cart 2
+        <Button onClick={addProductToCart} buttonType="atc">
+          Add to cart
         </Button>
       </div>
     </div>

@@ -72,7 +72,7 @@ export default function Header() {
           </div>
         </Container>
       </nav>
-      <CartDropdown open={cartOpen} />
+      <CartDropdown open={cartOpen} setCartOpen={setCartOpen} />
     </header>
   );
 }

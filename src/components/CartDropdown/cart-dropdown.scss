@@ -24,20 +24,10 @@
     text-align: center;
   }
 
-  .cart-dropdown__item {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-
-    span {
-      display: block;
-    }
-    img {
-      max-height: 100px;
-      max-width: 100px;
-      object-fit: cover;
-    }
+  .cart-dropdown__quantity {
+    font-weight: 600;
   }
+
   .cart-dropdown__footer {
     padding-top: 20px;
     border-top: 1px solid var(--primary-grey);

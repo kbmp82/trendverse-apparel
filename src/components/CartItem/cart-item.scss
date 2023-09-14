@@ -1,0 +1,24 @@
+.cart-dropdown__item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+
+  span {
+    display: block;
+  }
+  img {
+    max-height: 100px;
+    max-width: 100px;
+    object-fit: cover;
+  }
+
+  .cart-dropdown__item-price-wrapper {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    .cart-dropdown__item-total {
+      width: 100%;
+      margin-top: -10px;
+    }
+  }
+}

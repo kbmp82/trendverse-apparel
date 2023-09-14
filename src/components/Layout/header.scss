@@ -30,6 +30,7 @@ header {
 
       .navigation__links {
         display: flex;
+        align-items: center;
         gap: 25px;
         text-transform: uppercase;
         color: var(--primary-pink);
