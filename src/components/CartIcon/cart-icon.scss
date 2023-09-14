@@ -1,0 +1,18 @@
+.cart-icon-container {
+  position: relative;
+
+  .cart-icon__quantity {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+  }
+}

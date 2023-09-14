@@ -5,6 +5,7 @@ export default function Button({ children, buttonType, onClick }) {
   const BUTTON_TYPE_CLASSES = {
     google: "google-button",
     inverted: "inverted-button",
+    atc: "add-to-cart-button",
   };
 
   return (

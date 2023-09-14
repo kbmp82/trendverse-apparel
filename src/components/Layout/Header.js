@@ -1,13 +1,23 @@
 import "./header.scss";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import Container from "./Container";
 import { UserContext } from "../../context/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+
+//components
+import Container from "./Container";
+import CartIcon from "../CartIcon/CartIcon";
+import CartDropdown from "../CartDropdown/CartDropdown";
 
 export default function Header() {
   const { currentUser } = useContext(UserContext);
 
+  const [cartOpen, setCartOpen] = useState(false);
+
+  function toggleCartDrawer(e) {
+    e.preventDefault();
+    setCartOpen(!cartOpen);
+  }
   return (
     <header>
       <nav className="navigation">
@@ -50,13 +60,19 @@ export default function Header() {
               ) : (
                 ""
               )}
-              <Link to="/cart" className="navigation__link" aria-label="cart">
-                cart
+              <Link
+                onClick={toggleCartDrawer}
+                to="/cart"
+                className="navigation__link"
+                aria-label="cart"
+              >
+                <CartIcon />
               </Link>
             </div>
           </div>
         </Container>
       </nav>
+      <CartDropdown open={cartOpen} />
     </header>
   );
 }
