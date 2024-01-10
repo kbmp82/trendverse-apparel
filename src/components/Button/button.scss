@@ -8,7 +8,10 @@ button {
 
   &:hover {
     cursor: pointer;
-    opacity: 0.8;
+    animation-name: color-fade;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    opacity: 0.9;
   }
 }
 
@@ -33,19 +36,17 @@ button.google-button {
 }
 
 button.add-to-cart-button {
-  background: white;
-  border: 1px solid var(--primary-grey);
-  color: var(--light-grey);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 300;
+  font-weight: 500;
   text-transform: capitalize;
   opacity: 0.8;
 
   &:hover {
     animation-name: color-fade;
     animation-duration: 0.3s;
+
     animation-fill-mode: forwards;
     opacity: 0.9;
   }
@@ -53,10 +54,13 @@ button.add-to-cart-button {
 
 @keyframes color-fade {
   0% {
-    color: var(--light-grey);
+    background: black;
+    border: 1px solid black;
   }
 
   100% {
-    color: var(--primary-red);
+    color: white;
+    background: var(--primary-red);
+    border: 1px solid var(--primary-red);
   }
 }

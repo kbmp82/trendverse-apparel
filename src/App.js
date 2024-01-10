@@ -11,6 +11,7 @@ import Homepage from "./routes/Home/Homepage";
 import NotFound from "./components/Layout/NotFound";
 import Account from "./routes/Account/Account";
 import Shop from "./routes/Shop/Shop";
+import Checkout from "./routes/Checkout/Checkout";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/" exact element={<Homepage />} />
                 <Route path="/products" element={<Shop />} />
                 <Route path="/account" element={<Account />} />
+                <Route path="/checkout" element={<Checkout />} />
                 <Route path="/*" element={<NotFound />} />
               </Routes>
             </main>
