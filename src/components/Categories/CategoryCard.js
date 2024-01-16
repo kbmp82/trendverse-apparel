@@ -1,15 +1,20 @@
 import React from "react";
-
+import {
+  CategoryContent,
+  CategoryCTA,
+  CategoryImage,
+  Category,
+} from "./categories.styles";
 export default function Card({ item }) {
   return (
-    <div className={"category category--" + item.size}>
+    <Category className={"category--" + item.size}>
       <div className="category__wrapper">
-        <img src={item.image} alt={item.title} />
-        <div className="category__content">
+        <CategoryImage src={item.image} alt={item.title} />
+        <CategoryContent>
           <p className="category__title">{item.title}</p>
-          <p className="category__cta">shop now</p>
-        </div>
+          <CategoryCTA>shop now</CategoryCTA>
+        </CategoryContent>
       </div>
-    </div>
+    </Category>
   );
 }

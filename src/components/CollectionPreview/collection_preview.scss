@@ -1,0 +1,24 @@
+.collection-container {
+  margin-bottom: 50px;
+  h1 {
+    padding-bottom: 10px;
+    font-weight: 400;
+
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+
+  .collection__products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 25px;
+    row-gap: 50px;
+  }
+
+  .collection__title-link {
+    color: black;
+    text-decoration: none;
+  }
+}

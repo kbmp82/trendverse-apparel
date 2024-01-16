@@ -1,19 +1,13 @@
-import React, { useContext } from "react";
-import { ProductsContext } from "../../context/products.context";
-import Page from "../../components/Layout/Page";
-import ProductCard from "../../components/Products/ProductCard";
-import "../../components/Products/product-card.scss";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import CollectionsPreview from "../CollectionsPreview/CollectionsPreview";
+import Collection from "../Collection/Collection";
 
 export default function Shop() {
-  const { products } = useContext(ProductsContext);
-
   return (
-    <Page title="Products">
-      <div className="products">
-        {products.map((product) => {
-          return <ProductCard key={product.id} product={product} />;
-        })}
-      </div>
-    </Page>
+    <Routes>
+      <Route index element={<CollectionsPreview />} />
+      <Route path=":collection" element={<Collection />} />
+    </Routes>
   );
 }

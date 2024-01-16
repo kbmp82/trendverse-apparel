@@ -9,7 +9,7 @@ import {
 } from "../../utils/firebase/firebase.utils";
 
 //components
-import Button from "../Button/Button";
+import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 
 export default function LoginForm() {
   const { setCurrentUser } = useContext(UserContext);
@@ -81,7 +81,10 @@ export default function LoginForm() {
         <Button type="submit">Sign In</Button>
       </form>
       <hr className="separator" />
-      <Button buttonType="google" onClick={signInWithGoogle}>
+      <Button
+        buttonType={BUTTON_TYPE_CLASSES.google}
+        onClick={signInWithGoogle}
+      >
         <img src="/google.svg" alt="Google login button" />
         Sign in with Google
       </Button>

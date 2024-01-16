@@ -1,13 +1,13 @@
 import React from "react";
 import CategoryCard from "./CategoryCard";
-import "./categories.scss";
+import { CategoryGridContainer } from "./categories.styles";
 
 export default function CategoryGrid({ categories }) {
   return (
-    <div className="category-grid">
+    <CategoryGridContainer>
       {categories.map((item, index) => {
         return <CategoryCard key={index} item={item} />;
       })}
-    </div>
+    </CategoryGridContainer>
   );
 }

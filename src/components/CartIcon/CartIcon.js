@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
-import "./cart-icon.scss";
+import { CartIconContainer, CartIconQuantity } from "./cart-icon.styles";
 import CartCount from "../CartCount/CartCount";
 import { CartContext } from "../../context/cart.context";
 
 export default function CartIcon() {
   const { cartCount } = useContext(CartContext);
-  console.log({ cartCount });
   return (
-    <div className="cart-icon-container">
+    <CartIconContainer>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -23,12 +22,12 @@ export default function CartIcon() {
         />
       </svg>
       {cartCount !== 0 ? (
-        <span className="cart-icon__quantity">
+        <CartIconQuantity>
           <CartCount />
-        </span>
+        </CartIconQuantity>
       ) : (
         <></>
       )}
-    </div>
+    </CartIconContainer>
   );
 }

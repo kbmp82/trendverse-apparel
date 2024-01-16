@@ -3,7 +3,7 @@ import { useImmer } from "use-immer";
 import FormInput from "../FormInput/FormInput";
 import { UserContext } from "../../context/user.context";
 
-import Button from "../Button/Button";
+import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 import {
   auth,
   signInWithGooglePopup,
@@ -128,7 +128,10 @@ export default function SignUpForm() {
         <Button type="submit">Sign Up</Button>
       </form>
       <hr className="separator" />
-      <Button buttonType="google" onClick={signUpWithGoogle}>
+      <Button
+        buttonType={BUTTON_TYPE_CLASSES.google}
+        onClick={signUpWithGoogle}
+      >
         <img src="/google.svg" alt="Google login button" />
         Sign up with Google
       </Button>

@@ -1,6 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./cart-dropdown.scss";
+import {
+  CartDropdownContainer,
+  CartDropdownHeader,
+  CartDropdownFooter,
+  CartQuantity,
+} from "./cart-dropdown.styles";
 
 import { CartContext } from "../../context/cart.context";
 
@@ -37,23 +42,23 @@ export default function CartDropdown({ open, setCartOpen }) {
   };
 
   return (
-    <div className={"cart-dropdown" + (open ? " active" : "")}>
-      <div className="cart-dropdown__header">
+    <CartDropdownContainer className={open ? " active" : ""}>
+      <CartDropdownHeader>
         You have{" "}
-        <span className="cart-dropdown__quantity">
+        <CartQuantity>
           <CartCount />
-        </span>{" "}
+        </CartQuantity>{" "}
         {cartItems.length === 1 ? "item" : "items"} in your cart
-      </div>
+      </CartDropdownHeader>
       <div className="cart-dropdown__items">
         {cartItems.length > 0 &&
           cartItems.map((product) => {
             return <CartItem key={product.id} product={product} />;
           })}
       </div>
-      <div className="cart-dropdown__footer">
+      <CartDropdownFooter>
         <Button onClick={handleCheckoutNavigation}>Go To Checkout</Button>
-      </div>
-    </div>
+      </CartDropdownFooter>
+    </CartDropdownContainer>
   );
 }

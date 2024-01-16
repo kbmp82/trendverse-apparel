@@ -11,7 +11,16 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyBX54em23LbughMHUz1MziBo4w1lN95O50",
   authDomain: "trendverse-d5df0.firebaseapp.com",
@@ -36,6 +45,40 @@ export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleGrovider);
 export const db = getFirestore(); // initialize firestore db
 
+//import collections
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd,
+  field
+) => {
+  //create collection reference
+  const collectionRef = collection(db, collectionKey);
+
+  //use batch to verify transaction was completed correctly prior to executing write operation
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object[field].toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+};
+
+//get collections from database
+export const getCollectionsAndDocuments = async () => {
+  const collectionRef = collection(db, "collections");
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const collectionMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return collectionMap;
+};
 //add user to database
 export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, "users", userAuth.uid);

@@ -3,7 +3,7 @@ import "./product-card.scss";
 import { CartContext } from "../../context/cart.context";
 
 //components
-import Button from "../Button/Button";
+import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 
 export default function ProductCard({ product }) {
   const { addToCart } = useContext(CartContext);
@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
           <span className="product__name">{product.name}</span>
           <span className="prouct__price">{product.price}</span>
         </div>
-        <Button onClick={addProductToCart} buttonType="atc">
+        <Button onClick={addProductToCart} buttonType={BUTTON_TYPE_CLASSES.atc}>
           Add to cart
         </Button>
       </div>

@@ -1,4 +1,11 @@
-import "./header.scss";
+import {
+  HeaderContainer,
+  NavContainer,
+  Logo,
+  NavLink,
+  NavigationWrapper,
+  NavigationLinks,
+} from "./header.styles";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/user.context";
@@ -19,60 +26,43 @@ export default function Header() {
     setCartOpen(!cartOpen);
   }
   return (
-    <header>
-      <nav className="navigation">
+    <HeaderContainer>
+      <NavContainer>
         <Container>
-          <div className="navigation__wrapper">
-            <Link to="/" className="navigation__link" aria-label="home">
-              <img src="/logo_2.png" alt="TrendVerse Logo" />
-            </Link>
-            <div className="navigation__links">
-              <Link
-                to="/products"
-                className="navigation__link"
-                aria-label="shop"
-              >
+          <NavigationWrapper>
+            <NavLink to="/" aria-label="home">
+              <Logo src="/logo_2.png" alt="TrendVerse Logo" />
+            </NavLink>
+            <NavigationLinks>
+              <NavLink to="/shop" aria-label="shop">
                 shop
-              </Link>
-              <Link
-                to="/contact"
-                className="navigation__link"
-                aria-label="contact us"
-              >
+              </NavLink>
+              <NavLink to="/contact" aria-label="contact us">
                 contact
-              </Link>
-              <Link
-                to="/account"
-                className="navigation__link"
-                aria-label="my account"
-              >
+              </NavLink>
+              <NavLink to="/account" aria-label="my account">
                 account{" "}
-              </Link>
+              </NavLink>
               {currentUser ? (
-                <span
+                <NavLink
+                  as="span"
                   onClick={() => {
                     signOutUser();
                   }}
-                  className="navigation__link"
                 >
                   sign out
-                </span>
+                </NavLink>
               ) : (
                 ""
               )}
-              <Link
-                onClick={toggleCartDrawer}
-                to="/cart"
-                className="navigation__link"
-                aria-label="cart"
-              >
+              <NavLink onClick={toggleCartDrawer} to="/cart" aria-label="cart">
                 <CartIcon />
-              </Link>
-            </div>
-          </div>
+              </NavLink>
+            </NavigationLinks>
+          </NavigationWrapper>
         </Container>
-      </nav>
+      </NavContainer>
       <CartDropdown open={cartOpen} setCartOpen={setCartOpen} />
-    </header>
+    </HeaderContainer>
   );
 }

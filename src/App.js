@@ -1,6 +1,6 @@
 import "./App.css";
 import { UserProvider } from "./context/user.context";
-import { ProductsProvider } from "./context/products.context";
+import { CollectionsProvider } from "./context/collections.context";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { CartProvider } from "./context/cart.context";
 
@@ -18,19 +18,19 @@ function App() {
     <BrowserRouter>
       <CartProvider>
         <UserProvider>
-          <ProductsProvider>
+          <CollectionsProvider>
             <Header />
             <main>
               <Routes>
-                <Route path="/" exact element={<Homepage />} />
-                <Route path="/products" element={<Shop />} />
-                <Route path="/account" element={<Account />} />
-                <Route path="/checkout" element={<Checkout />} />
+                <Route index element={<Homepage />} />
+                <Route path="shop/*" element={<Shop />} />
+                <Route path="account" element={<Account />} />
+                <Route path="checkout" element={<Checkout />} />
                 <Route path="/*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />
-          </ProductsProvider>
+          </CollectionsProvider>
         </UserProvider>
       </CartProvider>
     </BrowserRouter>

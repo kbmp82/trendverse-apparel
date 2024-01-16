@@ -1,4 +1,19 @@
-button {
+import { styled, keyframes } from "styled-components";
+
+const colorfade = keyframes`
+   0% {
+    background: black;
+    border: 1px solid black;
+  }
+
+  100% {
+    color: white;
+    background: var(--primary-red);
+    border: 1px solid var(--primary-red);
+  }
+`;
+
+export const DefaultButton = styled.button`
   min-height: 50px;
   background-color: black;
   color: white;
@@ -8,14 +23,14 @@ button {
 
   &:hover {
     cursor: pointer;
-    animation-name: color-fade;
+    animation-name: ${colorfade};
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
     opacity: 0.9;
   }
-}
+`;
 
-button.google-button {
+export const GoogleSignInButton = styled(DefaultButton)`
   background: white;
   border: 1px solid black;
   color: black;
@@ -33,9 +48,9 @@ button.google-button {
     display: inline;
     order: 1;
   }
-}
+`;
 
-button.add-to-cart-button {
+export const ATCButton = styled(DefaultButton)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,23 +59,10 @@ button.add-to-cart-button {
   opacity: 0.8;
 
   &:hover {
-    animation-name: color-fade;
+    animation-name: ${colorfade};
     animation-duration: 0.3s;
 
     animation-fill-mode: forwards;
     opacity: 0.9;
   }
-}
-
-@keyframes color-fade {
-  0% {
-    background: black;
-    border: 1px solid black;
-  }
-
-  100% {
-    color: white;
-    background: var(--primary-red);
-    border: 1px solid var(--primary-red);
-  }
-}
+`;
