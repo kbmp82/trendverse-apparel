@@ -1,24 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
-import { CollectionsContext } from "../../context/collections.context";
+//import React, { useEffect, useState } from "react";
 import Page from "../../components/Layout/Page";
 import CollectionPreview from "../../components/CollectionPreview/CollectionPreview";
+import { useSelector } from "react-redux";
+import { getCollections } from "../../store/collections/collection.selector";
 
 export default function CategoriesPreview() {
-  const { collectionsMap } = useContext(CollectionsContext);
-  const [collections, setCollections] = useState({});
+  const collectionsMap = useSelector(getCollections);
+  //const [collections, setCollections] = useState({});
 
-  useEffect(() => {
-    setCollections(collectionsMap);
-  }, [collectionsMap]);
+  // useEffect(() => {
+  //   setCollections(collectionsMap);
+  // }, [collectionsMap]);
 
   return (
     <Page title="Products">
-      {Object.keys(collections).map((title, index) => {
+      {Object.keys(collectionsMap).map((title, index) => {
         return (
           <CollectionPreview
             key={index}
             title={title}
-            products={collections[title]}
+            products={collectionsMap[title]}
           />
         );
       })}

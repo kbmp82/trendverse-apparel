@@ -1,10 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import Page from "../../components/Layout/Page";
-import { CartContext } from "../../context/cart.context";
+//import { CartContext } from "../../context/cart.context";
+import {
+  selectCartItems,
+  selectCartCount,
+  selectCartTotal,
+} from "../../store/cart/cart.selector";
+import { useSelector } from "react-redux";
 import CheckoutItem from "../../components/CheckoutItem/CheckoutItem";
 
 export default function Checkout() {
-  const { cartItems, updateCart, cartTotal } = useContext(CartContext);
+  const cartCount = useSelector(selectCartCount);
+  const cartTotal = useSelector(selectCartTotal);
+  const cartItems = useSelector(selectCartItems);
 
   return (
     <Page title="Checkout">
@@ -19,9 +27,7 @@ export default function Checkout() {
         </div>
         {cartItems.length > 0 &&
           cartItems.map((item) => {
-            return (
-              <CheckoutItem item={item} key={item.id} updateCart={updateCart} />
-            );
+            return <CheckoutItem item={item} key={item.id} />;
           })}
         <div className="checkout__footer">
           <span className="total">Total: ${cartTotal}</span>

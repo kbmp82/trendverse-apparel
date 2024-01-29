@@ -66,18 +66,12 @@ export const addCollectionAndDocuments = async (
 };
 
 //get collections from database
-export const getCollectionsAndDocuments = async () => {
-  const collectionRef = collection(db, "collections");
+export const getCollectionsAndDocuments = async (type) => {
+  const collectionRef = collection(db, type);
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const collectionMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return collectionMap;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 //add user to database
 export const createUserDocumentFromAuth = async (userAuth) => {

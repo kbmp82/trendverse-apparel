@@ -1,10 +1,18 @@
 import React, { useContext } from "react";
 import "./checkout-item.scss";
 import { CartContext } from "../../context/cart.context";
+import {
+  decreaseQuantity,
+  addToCart,
+  removeCartItem,
+} from "../../store/cart/cart.action";
+import { selectCartItems } from "../../store/cart/cart.selector";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CheckoutItem({ item }) {
-  const { decreaseQuantity, addToCart, removeCartItem } =
-    useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+
   return (
     <div className="checkout__item grid">
       <img src={item.imageUrl} alt={item.name} />
@@ -17,7 +25,7 @@ export default function CheckoutItem({ item }) {
           stroke="currentColor"
           className="w-6 h-6"
           onClick={() => {
-            decreaseQuantity(item);
+            dispatch(decreaseQuantity(cartItems, item));
           }}
         >
           <path
@@ -35,7 +43,7 @@ export default function CheckoutItem({ item }) {
           stroke="currentColor"
           className="w-6 h-6"
           onClick={() => {
-            addToCart(item);
+            dispatch(addToCart(cartItems, item));
           }}
         >
           <path
@@ -50,7 +58,7 @@ export default function CheckoutItem({ item }) {
       <span className="remove">
         <svg
           onClick={() => {
-            removeCartItem(item);
+            dispatch(removeCartItem(cartItems, item));
           }}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

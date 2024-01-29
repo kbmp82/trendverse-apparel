@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { CartIconContainer, CartIconQuantity } from "./cart-icon.styles";
-import CartCount from "../CartCount/CartCount";
-import { CartContext } from "../../context/cart.context";
+//import CartCount from "../CartCount/CartCount";
+//import { CartContext } from "../../context/cart.context";
 
-export default function CartIcon() {
-  const { cartCount } = useContext(CartContext);
+export default function CartIcon({ cartCount }) {
   return (
     <CartIconContainer>
       <svg
@@ -22,9 +21,7 @@ export default function CartIcon() {
         />
       </svg>
       {cartCount !== 0 ? (
-        <CartIconQuantity>
-          <CartCount />
-        </CartIconQuantity>
+        <CartIconQuantity>{cartCount}</CartIconQuantity>
       ) : (
         <></>
       )}

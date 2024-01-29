@@ -1,3 +1,6 @@
+/*
+//replaced with redux
+
 import { createContext, useEffect, useState } from "react";
 //import SHOP_DATA from "../shopdata.js";
 import {
@@ -30,3 +33,4 @@ export const CollectionsProvider = ({ children }) => {
     </CollectionsContext.Provider>
   );
 };
+*/

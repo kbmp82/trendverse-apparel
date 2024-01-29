@@ -7,9 +7,17 @@ import {
   NavigationLinks,
 } from "./header.styles";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { UserContext } from "../../context/user.context";
+//import { Link } from "react-router-dom";
+//import { UserContext } from "../../context/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import {
+  selectIsCartOpen,
+  selectCartCount,
+} from "../../store/cart/cart.selector";
+import { setIsCartOpen } from "../../store/cart/cart.action";
+import { useDispatch } from "react-redux";
 
 //components
 import Container from "./Container";
@@ -17,13 +25,16 @@ import CartIcon from "../CartIcon/CartIcon";
 import CartDropdown from "../CartDropdown/CartDropdown";
 
 export default function Header() {
-  const { currentUser } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+  const cartOpen = useSelector(selectIsCartOpen);
+  const cartCount = useSelector(selectCartCount);
 
-  const [cartOpen, setCartOpen] = useState(false);
+  //const [cartOpen, setCartOpen] = useState(false);
 
   function toggleCartDrawer(e) {
     e.preventDefault();
-    setCartOpen(!cartOpen);
+    dispatch(setIsCartOpen(!cartOpen));
   }
   return (
     <HeaderContainer>
@@ -56,13 +67,17 @@ export default function Header() {
                 ""
               )}
               <NavLink onClick={toggleCartDrawer} to="/cart" aria-label="cart">
-                <CartIcon />
+                <CartIcon cartCount={cartCount} />
               </NavLink>
             </NavigationLinks>
           </NavigationWrapper>
         </Container>
       </NavContainer>
-      <CartDropdown open={cartOpen} setCartOpen={setCartOpen} />
+      <CartDropdown
+        open={cartOpen}
+        setIsCartOpen={setIsCartOpen}
+        cartCount={cartCount}
+      />
     </HeaderContainer>
   );
 }

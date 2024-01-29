@@ -1,13 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CollectionsContext } from "../../context/collections.context";
 import Page from "../../components/Layout/Page";
 import "../../components/CollectionPreview/collection_preview.scss";
 import ProductCard from "../../components/Products/ProductCard";
+import { useSelector } from "react-redux";
+import { getCollections } from "../../store/collections/collection.selector";
 
 export default function Collection() {
   const { collection } = useParams();
-  const { collectionsMap } = useContext(CollectionsContext);
+  const collectionsMap = useSelector(getCollections);
+
+  // const { collectionsMap } = useContext(CollectionsContext);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -25,7 +28,7 @@ export default function Collection() {
 
         <div className="collection__products">
           {products.map((product) => {
-            console.log(product);
+            // console.log(product);
             return <ProductCard key={product.id} product={product} />;
           })}
         </div>

@@ -1,8 +1,14 @@
-import "./App.css";
-import { UserProvider } from "./context/user.context";
-import { CollectionsProvider } from "./context/collections.context";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./context/cart.context";
+import {
+  onAuthStateChangedListener,
+  createUserDocumentFromAuth,
+} from "./utils/firebase/firebase.utils";
+
+import "./App.css";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./store/user/user.action";
 
 //components
 import Header from "./components/Layout/Header";
@@ -14,25 +20,32 @@ import Shop from "./routes/Shop/Shop";
 import Checkout from "./routes/Checkout/Checkout";
 
 function App() {
+  const dispatch = useDispatch();
+
+  //initiate user
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      console.log({ user });
+      if (user) createUserDocumentFromAuth(user);
+      dispatch(setCurrentUser(user));
+    });
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {});
   return (
     <BrowserRouter>
-      <CartProvider>
-        <UserProvider>
-          <CollectionsProvider>
-            <Header />
-            <main>
-              <Routes>
-                <Route index element={<Homepage />} />
-                <Route path="shop/*" element={<Shop />} />
-                <Route path="account" element={<Account />} />
-                <Route path="checkout" element={<Checkout />} />
-                <Route path="/*" element={<NotFound />} />
-              </Routes>
-            </main>
-            <Footer />
-          </CollectionsProvider>
-        </UserProvider>
-      </CartProvider>
+      <Header />
+      <main>
+        <Routes>
+          <Route index element={<Homepage />} />
+          <Route path="shop/*" element={<Shop />} />
+          <Route path="account" element={<Account />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </main>
+      <Footer />
     </BrowserRouter>
   );
 }

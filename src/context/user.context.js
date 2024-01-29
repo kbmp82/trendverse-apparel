@@ -1,3 +1,6 @@
+/*
+//replaced with redux
+
 import { createContext, useEffect, useReducer } from "react";
 import {
   onAuthStateChangedListener,
@@ -49,3 +52,4 @@ export const UserProvider = ({ children }) => {
   }, []);
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
+*/

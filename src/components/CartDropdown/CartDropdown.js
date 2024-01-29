@@ -7,16 +7,20 @@ import {
   CartQuantity,
 } from "./cart-dropdown.styles";
 
-import { CartContext } from "../../context/cart.context";
+//import { CartContext } from "../../context/cart.context";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "../../store/cart/cart.selector";
 
 //components
 import Button from "../Button/Button";
 import CartItem from "../CartItem/CartItem";
-import CartCount from "../CartCount/CartCount";
+//import CartCount from "../CartCount/CartCount";
 
-export default function CartDropdown({ open, setCartOpen }) {
+export default function CartDropdown({ open, setIsCartOpen, cartCount }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cartItems } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
+
   useEffect(() => {
     if (open) {
       setTimeout(() => {
@@ -32,7 +36,7 @@ export default function CartDropdown({ open, setCartOpen }) {
   function handleCartDrawerClose(e) {
     const className = e.target.classList && e.target.classList[0];
     if (!className || className.indexOf("cart-dropdown") == -1) {
-      setCartOpen(false);
+      dispatch(setIsCartOpen(false));
     }
   }
 
@@ -44,10 +48,7 @@ export default function CartDropdown({ open, setCartOpen }) {
   return (
     <CartDropdownContainer className={open ? " active" : ""}>
       <CartDropdownHeader>
-        You have{" "}
-        <CartQuantity>
-          <CartCount />
-        </CartQuantity>{" "}
+        You have <CartQuantity>{cartCount}</CartQuantity>{" "}
         {cartItems.length === 1 ? "item" : "items"} in your cart
       </CartDropdownHeader>
       <div className="cart-dropdown__items">

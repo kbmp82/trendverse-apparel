@@ -1,0 +1,3 @@
+export const COLLECTION_ACTION_TYPES = {
+  SET_COLLECTIONS: "collection/SET_COLLECTIONS",
+};
