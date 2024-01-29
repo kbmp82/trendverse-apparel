@@ -17,3 +17,8 @@ export const getCollections = createSelector(
     }, {});
   }
 );
+
+export const selectCollectionsIsLoading = createSelector(
+  [selectCollectionsReducer],
+  (collectionsSlice) => collectionsSlice.isLoading
+);
