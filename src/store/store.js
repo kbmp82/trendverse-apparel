@@ -9,6 +9,7 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["cart"], //only persist the cart
+  blacklist: [], //ignored state vars
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
