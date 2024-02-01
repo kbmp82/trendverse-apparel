@@ -18,12 +18,12 @@ export const fetchCollectionsFail = (error) => {
   createAction(COLLECTION_ACTION_TYPES.FETCH_COLLECTIONS_FAIL, error);
 };
 
-export const fetchCollectionsAsync = () => async (dispatch) => {
-  dispatch(fetchCollectionsStart());
-  try {
-    const collectionsArray = await getCollectionsAndDocuments("collections");
-    dispatch(fetchCollectionsSuccess(collectionsArray));
-  } catch (error) {
-    dispatch(fetchCollectionsFail(error));
-  }
-};
+// export const fetchCollectionsAsync = () => async (dispatch) => {
+//   dispatch(fetchCollectionsStart());
+//   try {
+//     const collectionsArray = await getCollectionsAndDocuments("collections");
+//     dispatch(fetchCollectionsSuccess(collectionsArray));
+//   } catch (error) {
+//     dispatch(fetchCollectionsFail(error));
+//   }
+// };

@@ -9,7 +9,8 @@ import {
 import React, { useContext, useState } from "react";
 //import { Link } from "react-router-dom";
 //import { UserContext } from "../../context/user.context";
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+//import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { signOutStart } from "../../store/user/user.action";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import {
@@ -58,7 +59,7 @@ export default function Header() {
                 <NavLink
                   as="span"
                   onClick={() => {
-                    signOutUser();
+                    dispatch(signOutStart());
                   }}
                 >
                   sign out

@@ -3,7 +3,11 @@ import logger from "redux-logger";
 import { rootReducer } from "./root-reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { thunk } from "redux-thunk";
+
+//use thunk or saga for asynchronous management
+//import { thunk } from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
+import { rootSaga } from "./root-saga";
 
 const persistConfig = {
   key: "root",
@@ -12,7 +16,10 @@ const persistConfig = {
   blacklist: [], //ignored state vars
 };
 
+const sagaMiddleware = createSagaMiddleware();
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const loggerMiddleware = (store) => (next) => (action) => {
   if (!action.type) return next(action);
 
@@ -32,7 +39,8 @@ const loggerMiddleware = (store) => (next) => (action) => {
 
 const middleWares = [
   process.env.NODE_ENV === "development" && loggerMiddleware,
-  thunk,
+  // thunk,
+  sagaMiddleware,
 ].filter(Boolean); //only display logs during development
 
 const composeEnhancer =
@@ -48,4 +56,5 @@ export const store = createStore(
   composedEnhancers
 );
 
+sagaMiddleware.run(rootSaga);
 export const persistor = persistStore(store);

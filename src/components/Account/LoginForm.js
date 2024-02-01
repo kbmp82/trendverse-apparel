@@ -1,25 +1,28 @@
 import React, { useContext, useEffect } from "react";
 import FormInput from "../FormInput/FormInput";
-import { UserContext } from "../../context/user.context";
+//import { UserContext } from "../../context/user.context";
 import { useImmer } from "use-immer";
 import {
-  auth,
-  signInWithGooglePopup,
+  // auth,
+  //signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
-
+import { useDispatch } from "react-redux";
+import { googleSignInStart } from "../../store/user/user.action";
 //components
 import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 
 export default function LoginForm() {
-  const { setCurrentUser } = useContext(UserContext);
+  const dispatch = useDispatch();
+  // const { setCurrentUser } = useContext(UserContext);
   const [state, setState] = useImmer({
     email: "",
     password: "",
   });
 
-  const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
+  const signInWithGoogle = () => {
+    dispatch(googleSignInStart());
+    //const { user } = await signInWithGooglePopup();
   };
 
   function setFormField(e) {

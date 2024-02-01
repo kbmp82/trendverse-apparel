@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { useImmer } from "use-immer";
 import FormInput from "../FormInput/FormInput";
 import { UserContext } from "../../context/user.context";
-
+import { useDispatch } from "react-redux";
+import { signUpStart } from "../../store/user/user.action";
 import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 import {
   auth,
@@ -12,6 +13,7 @@ import {
 } from "../../utils/firebase/firebase.utils";
 
 export default function SignUpForm() {
+  const dispatch = useDispatch();
   const [state, setState] = useImmer({
     displayName: "",
     email: "",
@@ -62,27 +64,36 @@ export default function SignUpForm() {
     }
 
     //submit form
-    try {
-      const res = await createAuthUserWithEmailAndPassword(
-        state.email,
-        state.password,
-        state.displayName
-      );
-      console.log(res);
-      setState((draft) => {
-        return {
-          displayName: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        };
-      });
-    } catch (error) {
-      if (error.code == "auth/email-already-in-use") {
-        console.log("user already exists");
-      }
-      console.log(error);
-    }
+    dispatch(signUpStart(state.email, state.password, state.displayName));
+    setState((draft) => {
+      return {
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      };
+    });
+    // try {
+    //   const res = await createAuthUserWithEmailAndPassword(
+    //     state.email,
+    //     state.password,
+    //     state.displayName
+    //   );
+    //   console.log(res);
+    //   setState((draft) => {
+    //     return {
+    //       displayName: "",
+    //       email: "",
+    //       password: "",
+    //       confirmPassword: "",
+    //     };
+    //   });
+    // } catch (error) {
+    //   if (error.code == "auth/email-already-in-use") {
+    //     console.log("user already exists");
+    //   }
+    //   console.log(error);
+    // }
   }
   return (
     <div className="account__signup">
