@@ -1,5 +1,7 @@
 import { styled, keyframes } from "styled-components";
 
+import { SpinnerContainer } from "../Spinner/spinner.styles";
+
 const colorfade = keyframes`
    0% {
     background: black;
@@ -20,8 +22,13 @@ export const DefaultButton = styled.button`
   border: none;
   border-radius: 3px;
   width: 100%;
-
-  &:hover {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  &:disabled {
+    background-color: var(--light-grey);
+  }
+  &:hover:not(:disabled) {
     cursor: pointer;
     animation-name: ${colorfade};
     animation-duration: 0.3s;
@@ -65,4 +72,14 @@ export const ATCButton = styled(DefaultButton)`
     animation-fill-mode: forwards;
     opacity: 0.9;
   }
+`;
+
+export const PaymentButton = styled(DefaultButton)`
+  max-height: 50px;
+  margin-top: 50px;
+`;
+
+export const ButtonSpinner = styled(SpinnerContainer)`
+  width: 30px;
+  height: 30px;
 `;
