@@ -8,7 +8,12 @@ export const PaymentFormContainer = styled.div`
   align-items: center;
   background-color: #f5f5f5;
   padding: 25px;
+  height: fit-content;
   /* justify-content: center; */
+
+  & > h2 {
+    font-weight: 400;
+  }
 `;
 
 export const FormContainer = styled.form`
@@ -18,9 +23,5 @@ export const FormContainer = styled.form`
   width: 100%;
   & > div {
     width: 100%;
-  }
-
-  & .ElementsApp input {
-    background-color: white !important;
   }
 `;
